@@ -1,0 +1,20 @@
+.content {
+  grid-area: c;
+  background-color: rgb(201, 201, 174);
+}
+
+.image {
+  width: 300px;
+}
+
+.postsBlock {
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid rgb(69, 185, 100);
+  border-radius: 2%;
+  background-color: rgb(201, 201, 174);
+}
+
+.posts {
+  margin-top: 20px;
+}

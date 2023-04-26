@@ -1,0 +1,19 @@
+.nav {
+    grid-area: n;
+    background-color: rgb(181, 229, 229);
+}
+
+.item a {
+    color: rgb(51, 170, 65);
+    text-decoration: none;
+}
+
+
+.item a.activeLink {
+    color: purple;
+    text-decoration: none;
+}
+
+.activeLink {
+    color: purple;
+}
