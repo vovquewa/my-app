@@ -1,36 +1,51 @@
 import React from "react";
 import classes from './MyPosts.module.css';
 import Post from "./Post/Post";
+// import rerenderEntireTree from "../../../index";
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+
+    let postsElements = props.posts.map(post => (
+        <Post
+            message={post.message}
+            likesCount={post.likesCount}
+            img_url={post.img_url}
+        />
+    ))
+
+    let addPost = () => {
+        props.addPost();
+        props.updateNewPostText('');
+
+
+    }
+
+    let onPostChange = () => {
+        let text = newPostElement.current.value;
+        props.updateNewPostText(text);
+    }
+
+    
+
+    let newPostElement = React.createRef();
+
     return (
         <div className={classes.postsBlock}>
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea
+                        ref={newPostElement}
+                        value={props.newPostText}
+                        onChange={onPostChange}
+                    ></textarea>
                 </div>
                 <div>
-                    <button>Add post</button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
             <div className={classes.posts}>
-                <Post
-                    message='Hi, how are you?'
-                    likesCount='0'
-                    img_url='https://variety.com/wp-content/uploads/2020/08/0-thumb.jpg?w=681&h=383&crop=1'
-                />
-                <Post
-                    message="It's my first post"
-                    likesCount='10'
-                    img_url='https://static1.pocketlintimages.com/wordpress/wp-content/uploads/149551-tv-feature-what-is-the-best-order-to-watch-the-x-men-movies-image1-y5wpzep24w.jpg?q=50&fit=contain&w=943&h=&dpr=1.5'
-                />
-                <Post
-                    message="It's my 2 post"
-                    likesCount='20'
-                    img_url='https://los40mx00.epimg.net/los40/imagenes/2021/09/23/cinetv/1632407274_510548_1632407716_gigante_normal.jpg'
-                />
-
+                {postsElements}
             </div>
         </div>
 
