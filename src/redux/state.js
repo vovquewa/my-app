@@ -1,22 +1,6 @@
-// state.js файл с состоянием приложения
-// В нем хранятся все данные, которые используются в приложении
-// Все данные, которые хранятся в state, должны быть immutable
-// Это значит, что их нельзя изменять напрямую, а только через специальные функции
-// Например, если мы хотим добавить новый элемент в массив, то мы не можем написать
-// state.items.push('new item')
-// Мы должны написать
-// state.items = [...state.items, 'new item']
-// Таким образом мы создаем новый массив, в который добавляем новый элемент
-// А старый массив остается неизменным
-// Это нужно для того, чтобы React мог правильно обновлять компоненты
-// Если мы будем изменять данные напрямую, то React не сможет понять, что данные изменились
-// И не сможет обновить компоненты
-// Поэтому мы должны изменять данные только через специальные функции
-// Которые создают новые данные на основе старых
-//
-
-// Path: my-app/src/state.js
-import rerenderEntireTree from "../render"
+let rerenderEntireTree = () => {
+    console.log('State changed')
+}
 
 let posts = [
     {
@@ -84,6 +68,10 @@ let addPost = () => {
 let updateNewPostText = (newText) => {
     state.profilePage.newPostText = newText;
     rerenderEntireTree(state)
+}
+
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer
 }
 
 export { addPost };
