@@ -3,28 +3,39 @@ import React from "react";
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import { updateNewMessageBodyCreator, sendMessageCreator } from "../../redux/state";
 
 
 const Dialogs = (props) => {
-    let dialogElements = props.state.dialogs.map(dialog => (
+
+    let state = props.store.getState().dialogsPage; 
+
+    let dialogElements = state.dialogs.map(dialog => (
         <DialogItem
             name={dialog.name}
             id={dialog.id}
         />
     ))
 
-    let messagesElements = props.state.messages.map(message => (
+
+
+    let messagesElements = state.messages.map(message => (
         <Message
             message={message.message}
         />
     ))
 
-    let addDialog = () => {
-        let text = newDialogElement.current.value;
-        alert(text)
+    let newMessageBody = state.newMessageBody;
+    window.state = state;
+
+    let onSendMessageClick = () => {
+        props.store.dispatch(sendMessageCreator())
     }
 
-    let newDialogElement = React.createRef();
+    let onNewMessageChange = (e) => {
+        let body = e.target.value;
+        props.store.dispatch(updateNewMessageBodyCreator(body))
+    }
 
 
     return (
@@ -33,14 +44,19 @@ const Dialogs = (props) => {
                 {dialogElements}
             </div>
             <div className={s.messages}>
-                {messagesElements}
+                <div>{messagesElements}</div>
+                <div>
+                    <h3>Add dialog:</h3>
+                    <textarea
+                        placeholder="Enter the matrix"
+                        onChange={onNewMessageChange}
+                        value={newMessageBody}
+                    ></textarea>
+                    <br />
+                    <button onClick={onSendMessageClick}>Send</button>
+                </div>
             </div>
-            <div>
-                <h3>Add dialog:</h3>
-                <textarea ref={newDialogElement}></textarea>
-                <br />
-                <button onClick={addDialog}>Send</button>
-            </div>
+
         </div>
 
 
