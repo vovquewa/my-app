@@ -41,36 +41,38 @@ let store = {
             ],
         }
     },
-    rerenderEntireTree() {
+    _callSubscriber() {
         console.log('State changed')
     },
-    addPost() {
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 10,
-            img_url: 'https://variety.com/wp-content/uploads/2020/08/0-thumb.jpg?w=681&h=383&crop=1'
-        }
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = ''
-        this.rerenderEntireTree(this._state);
-    },
-    updateNewPostText(newText) {
-        this._state.profilePage.newPostText = newText;
-        this.rerenderEntireTree(this._state)
-    },
+
     subscribe(observer) {
-        this.rerenderEntireTree = observer
+        this._callSubscriber = observer
     },
+
     getState() {
         return this._state
+    },
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 10,
+                img_url: 'https://variety.com/wp-content/uploads/2020/08/0-thumb.jpg?w=681&h=383&crop=1'
+            }
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber(this._state);
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state)
+        }
     }
 }
 
 
 
 window.store = store;
-
-
 export default store;
 
