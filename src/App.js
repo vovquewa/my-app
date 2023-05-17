@@ -10,8 +10,8 @@ import Settings from './components/Settings/Settings';
 import News from './components/News/News';
 
 const App = (props) => {
-
   return (
+
     <BrowserRouter>
       <div className='app-wrapper'>
         <Header />

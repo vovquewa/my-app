@@ -1,0 +1,21 @@
+import { combineReducers } from "redux";
+import profileReducer from "./profile_reducer";
+import dialogsReducer from "./dialogs_reducer";
+import sidebarReducer from "./sidebar_reducer";
+// import { configureStore } from "@reduxjs/toolkit";
+import { legacy_createStore } from "redux";
+
+const rootReducer = combineReducers({
+    profilePage: profileReducer,
+    dialogsPage: dialogsReducer,
+    sidebar: sidebarReducer
+})
+
+let store = legacy_createStore(rootReducer)
+// const store = configureStore(
+//     {
+//         reducer: rootReducer,
+//     }
+// )
+
+export default store;
