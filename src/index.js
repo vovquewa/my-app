@@ -12,7 +12,7 @@ const rerenderEntireTree = (state) => {
     <React.StrictMode>
       <App
         state={state}
-        dispatch={store.dispatch.bind(store)}
+        dispatch={store.dispatch.bind(store)} // bind - привязка контекста к функции (привязка store к dispatch)
         store={store}
       />
     </React.StrictMode>
