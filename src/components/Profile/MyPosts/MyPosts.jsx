@@ -2,7 +2,7 @@ import React from "react";
 import classes from './MyPosts.module.css';
 import Post from "./Post/Post";
 // import rerenderEntireTree from "../../../index";
-import { addPostActionCreator, updateNewPostTextActionCreator } from "../../../redux/state";
+import { addPostActionCreator, updateNewPostTextActionCreator } from "../../../redux/profile_reducer";
 
 
 
