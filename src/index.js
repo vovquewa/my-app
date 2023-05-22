@@ -4,17 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/redux_store';
+import { Provider } from './StoreContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const rerenderEntireTree = (state) => {
   root.render(
     <React.StrictMode>
-      <App
-        state={state}
-        dispatch={store.dispatch.bind(store)} // bind - привязка контекста к функции (привязка store к dispatch)
-        store={store}
-      />
+      <Provider store={store}>
+        <App/>
+      </Provider>
     </React.StrictMode>
   );
   reportWebVitals();
