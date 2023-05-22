@@ -27,20 +27,26 @@ let initialState = {
 
 
 const profileReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case ADD_POST:
+    switch (action.type) {
+        case ADD_POST: {
             let newPost = {
                 id: 5,
                 message: state.newPostText,
                 likesCount: 10,
                 img_url: 'https://variety.com/wp-content/uploads/2020/08/0-thumb.jpg?w=681&h=383&crop=1'
             }
-            state.posts.push(newPost);
-            state.newPostText = ''
-            return state
-        case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-            return state
+            // поскольку реакт не перерисовывает компоненту, если не изменился state, то мы создаем копию state, изменяем ее и возвращаем вместо исходного state
+            let StateCopy = { ...state };
+            StateCopy.posts = [...state.posts];
+            StateCopy.posts.push(newPost);
+            StateCopy.newPostText = ''
+            return StateCopy
+        }
+        case UPDATE_NEW_POST_TEXT: {
+            let StateCopy = { ...state };
+            StateCopy.newPostText = action.newText;
+            return StateCopy
+        }
         default:
             return state
     }

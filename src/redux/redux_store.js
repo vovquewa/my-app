@@ -12,10 +12,7 @@ const rootReducer = combineReducers({
 })
 
 let store = legacy_createStore(rootReducer)
-// const store = configureStore(
-//     {
-//         reducer: rootReducer,
-//     }
-// )
+
+window.store = store;
 
 export default store;
