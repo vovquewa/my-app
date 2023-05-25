@@ -1,10 +1,6 @@
 import React from "react";
 import classes from './MyPosts.module.css';
 import Post from "./Post/Post";
-// import rerenderEntireTree from "../../../index";
-import { addPostActionCreator, updateNewPostTextActionCreator } from "../../../redux/profile_reducer";
-
-
 
 const MyPosts = (props) => {
 
@@ -13,6 +9,7 @@ const MyPosts = (props) => {
             message={post.message}
             likesCount={post.likesCount}
             img_url={post.img_url}
+            key={post.id}
         />
     ))
 

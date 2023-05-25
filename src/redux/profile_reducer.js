@@ -36,15 +36,18 @@ const profileReducer = (state = initialState, action) => {
                 img_url: 'https://variety.com/wp-content/uploads/2020/08/0-thumb.jpg?w=681&h=383&crop=1'
             }
             // поскольку реакт не перерисовывает компоненту, если не изменился state, то мы создаем копию state, изменяем ее и возвращаем вместо исходного state
-            let StateCopy = { ...state };
-            StateCopy.posts = [...state.posts];
-            StateCopy.posts.push(newPost);
-            StateCopy.newPostText = ''
+            let StateCopy = {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: ''
+            };
             return StateCopy
         }
         case UPDATE_NEW_POST_TEXT: {
-            let StateCopy = { ...state };
-            StateCopy.newPostText = action.newText;
+            let StateCopy = {
+                ...state,
+                newPostText: action.newText
+            };
             return StateCopy
         }
         default:

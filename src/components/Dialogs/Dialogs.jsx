@@ -13,6 +13,7 @@ const Dialogs = (props) => {
         <DialogItem
             name={dialog.name}
             id={dialog.id}
+            key={dialog.id}
         />
     ))
 
@@ -21,6 +22,7 @@ const Dialogs = (props) => {
     let messagesElements = state.messages.map(message => (
         <Message
             message={message.message}
+            key={message.id}
         />
     ))
 
